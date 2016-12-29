@@ -10,7 +10,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+
+import com.mobileclass.handsomeboy.myapplication.CalendarManager;
+import com.mobileclass.handsomeboy.myapplication.ScheduleDatabase;
+import com.mobileclass.handsomeboy.myapplication.SchedulePackage;
 
 import info.devexchanges.navvp.preferences.AlarmPreferencesActivity;
 

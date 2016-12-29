@@ -2,6 +2,7 @@ package com.example.keng.settime;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener
-                                                                ,AdapterView.OnItemLongClickListener{
+                                                                ,AdapterView.OnItemLongClickListener ,MyBroadcastRecv.ServiceGeter{
 
     Calendar calendar;
     ArrayList<String> arrayList;
@@ -116,5 +117,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         //Log_message
         Log.e("remove",selected);
         return  true;
+    }
+
+    @Override
+    public Service onServiceReturn() {
+        return null;
     }
 }
