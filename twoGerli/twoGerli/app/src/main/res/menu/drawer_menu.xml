@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fr1"
+        android:icon="@mipmap/calendar"
+        android:title="Calendar" />
+
+    <item
+        android:id="@+id/fr2"
+        android:icon="@mipmap/lists"
+        android:title="Agenda" />
+
+    <item
+        android:id="@+id/fr3"
+        android:icon="@mipmap/clock"
+        android:title="Alarm Clock" />
+
+    <item
+        android:id="@+id/set"
+        android:icon="@mipmap/settings"
+        android:title="Settings" />
+
+    <item
+        android:id="@+id/close"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Close this App" />
+
+</menu>
