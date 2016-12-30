@@ -8,19 +8,24 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.PopupMenu;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by HandsomeBoy on 2016/12/7.
  */
 public class ScheduleDatabase {
+    private static boolean isModify = false;
     private static final int VERSION = 1;
     private final String DatabaseName = "scheduleDatabase";
 
     private final String yearFilter = "substr(time,1,4)";   //年為單位的篩選
     private final String monthFilter = "substr(time,1,7)";  //月為單位的篩選
     private final String dayFilter = "substr(time,1,10)";   //日為單位的篩選
+    private final String millisecondFilter = "substr(time,1,21)";
 
     //操作Database的內部成員
     private SQLiteDB sqLiteDB;
@@ -31,6 +36,37 @@ public class ScheduleDatabase {
         db = sqLiteDB.getWritableDatabase();
     }
 
+    //region Notification
+
+    public int[] getLatestRecordTime(){
+        String currentTime = CalendarManager.getTime();
+        Cursor cursor = db.rawQuery("SELECT Time FROM " + SQLiteDB.scheduleTable +
+                " WHERE "+millisecondFilter+">'" + currentTime + "'" +
+                " ORDER BY Time ASC" +
+                " LIMIT " + 1 ,null);
+
+        if(cursor.getCount() > 0){
+            cursor.moveToFirst();
+            String timeStr = cursor.getString(0);
+            if(getModify()){
+                setModify(false);
+            }
+            return CalendarManager.parseTime(timeStr);
+        }
+
+
+        return null;
+    }
+
+    public static boolean getModify(){
+        return isModify;
+    }
+
+    public static void setModify(boolean bool){
+        isModify = bool;
+    }
+
+    //endregion
 
     //region getSchedule
 
@@ -93,7 +129,11 @@ public class ScheduleDatabase {
         contentValues.put(SQLiteDB.scd_Name,Name);
 
         //插入資料
-        return db.insert(SQLiteDB.scheduleTable, null, contentValues) != -1;
+        boolean result = db.insert(SQLiteDB.scheduleTable, null, contentValues) != -1;
+        if(result){
+            setModify(true);
+        }
+        return result;
     }
 
     //endregion
@@ -109,7 +149,11 @@ public class ScheduleDatabase {
             contentValues.put(SQLiteDB.scd_Name, name);
         }
 
-        return update(Table.SCHEDULE,contentValues,id);
+        boolean result = update(Table.SCHEDULE,contentValues,id);
+        if(result){
+            setModify(true);
+        }
+        return result;
     }
 
     //endregion
@@ -117,7 +161,11 @@ public class ScheduleDatabase {
     //region deleteSchedule
 
     public boolean deleteSchedule(long id){
-        return delete(Table.SCHEDULE,id);
+        boolean result = delete(Table.SCHEDULE,id);
+        if(result){
+            setModify(true);
+        }
+        return result;
     }
 
     //endregion

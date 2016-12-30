@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="info.devexchanges.navvp">
 
-    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +21,9 @@
             android:name=".preferences.AlarmPreferencesActivity"
             android:label="Alarm Clock Setting" />
 
+        <service
+            android:name=".ScheduleIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

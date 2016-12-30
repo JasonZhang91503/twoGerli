@@ -1,5 +1,8 @@
 package info.devexchanges.navvp;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -17,6 +20,10 @@ import com.mobileclass.handsomeboy.myapplication.CalendarManager;
 import com.mobileclass.handsomeboy.myapplication.ScheduleDatabase;
 import com.mobileclass.handsomeboy.myapplication.SchedulePackage;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.TimeZone;
+
 import info.devexchanges.navvp.preferences.AlarmPreferencesActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -30,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(!ScheduleIntentService.isServiceRunning(this,"ScheduleIntentService")){
+            ScheduleIntentService.startActionNotify(this);
+        }
 
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -81,6 +92,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+
+        ScheduleDatabase scheduleDatabase = new ScheduleDatabase(this);
+        scheduleDatabase.insertSchedule(CalendarManager.getTime(2016,12,30,5,7,20),"YEAH");
+        scheduleDatabase.insertSchedule(CalendarManager.getTime(2016,12,30,5,7,25),"YEAH");
+        scheduleDatabase.insertSchedule(CalendarManager.getTime(2016,12,30,5,7,28),"YEAH");
+
+
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
+        Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
+        Log.d("TEST",timestamp.toString());
     }
 
     @Override

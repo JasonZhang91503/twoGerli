@@ -118,8 +118,9 @@ public class CalendarManager {
 
     public static String getTime(){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
-        Timestamp timestamp = new Timestamp(calendar.getTimeInMillis() + TimeZone.getTimeZone("GMT+8:00").getRawOffset());
-
+        calendar.set(Calendar.MILLISECOND,0);
+        Timestamp timestamp = new Timestamp(calendar.getTimeInMillis() );
+        //Log.d("Timestamp",timestamp.toString());
         return timestamp.toString();
     }
 
@@ -132,7 +133,7 @@ public class CalendarManager {
         calendar.set(Calendar.MINUTE,min);
         calendar.set(Calendar.SECOND,sec);
         calendar.set(Calendar.MILLISECOND,0);
-        Timestamp timestamp = new Timestamp(calendar.getTimeInMillis() + TimeZone.getTimeZone("GMT+8:00").getRawOffset());
+        Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
 
         return timestamp.toString();
     }
