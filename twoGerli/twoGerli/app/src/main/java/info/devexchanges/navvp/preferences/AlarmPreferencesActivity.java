@@ -1,15 +1,5 @@
 package info.devexchanges.navvp.preferences;
 
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import java.util.Calendar;
-import info.devexchanges.navvp.Alarm;
-import info.devexchanges.navvp.BaseActivity;
-import info.devexchanges.navvp.database.Database;
-import info.devexchanges.navvp.preferences.AlarmPreference.Key;
-import info.devexchanges.navvp.R;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
@@ -20,27 +10,32 @@ import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.support.v7.widget.Toolbar;
 import android.view.HapticFeedbackConstants;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import static android.R.id.message;
+import java.util.Calendar;
 
-public class AlarmPreferencesActivity extends BaseActivity{
-    ImageButton deleteButton;
-    TextView okButton;
-    TextView cancelButton;
+import info.devexchanges.navvp.Alarm;
+import info.devexchanges.navvp.BaseActivity;
+import info.devexchanges.navvp.R;
+import info.devexchanges.navvp.database.Database;
+import info.devexchanges.navvp.preferences.AlarmPreference.Key;
+
+public class AlarmPreferencesActivity extends BaseActivity {
+
     private Alarm alarm;
     private MediaPlayer mediaPlayer;
 
@@ -111,7 +106,7 @@ public class AlarmPreferencesActivity extends BaseActivity{
                         input.setText(alarmPreference.getValue().toString());
 
                         alert.setView(input);
-                        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        alert.setPositiveButton("Ok", new OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
 
                                 alarmPreference.setValue(input.getText().toString());
@@ -277,11 +272,7 @@ public class AlarmPreferencesActivity extends BaseActivity{
 
 
     }
-    public boolean onCreateOptionsMenu(Menu menu) {
-        boolean result = super.onCreateOptionsMenu(menu);
-        menu.findItem(R.id.menu_item_new).setVisible(false);
-        return result;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -299,35 +290,6 @@ public class AlarmPreferencesActivity extends BaseActivity{
                 callMathAlarmScheduleService();
                 Toast.makeText(AlarmPreferencesActivity.this, getMathAlarm().getTimeUntilNextAlarmMessage(), Toast.LENGTH_LONG).show();
                 finish();
-                break;
-            case R.id.menu_item_delete:
-                AlertDialog.Builder dialog = new AlertDialog.Builder(AlarmPreferencesActivity.this);
-                dialog.setTitle("Delete");
-                dialog.setMessage("Delete this alarm?");
-                dialog.setPositiveButton("Ok", new OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Database.init(getApplicationContext());
-                        if (getMathAlarm().getId() < 1) {
-                            // Alarm not saved
-                        } else {
-                            Database.deleteEntry(alarm);
-                            callMathAlarmScheduleService();
-                        }
-                        finish();
-                    }
-                });
-                dialog.setNegativeButton("Cancel", new OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-
                 break;
         }
         return super.onOptionsItemSelected(item);

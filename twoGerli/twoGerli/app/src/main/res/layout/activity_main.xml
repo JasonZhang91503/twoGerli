@@ -13,7 +13,8 @@
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="@android:color/white"
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawerLayout"
@@ -31,8 +32,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/toolbar"
                 android:background="#125688"
+                app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
                 android:minHeight="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:tabPaddingEnd="80dp"
+                app:tabPaddingStart="60dp" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager"

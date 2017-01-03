@@ -54,9 +54,9 @@ public class MathProblem {
         for (int i = 0; i < numParts; i++)
             parts.add(i, (float) random.nextInt(max - min + 1) + min);
 
-        operators = new ArrayList<MathProblem.Operator>(numParts - 1);
+        operators = new ArrayList<Operator>(numParts - 1);
         for (int i = 0; i < numParts - 1; i++)
-            operators.add(i,Operator.values()[random.nextInt(2)+1]);
+            operators.add(i, Operator.values()[random.nextInt(2)+1]);
 
         ArrayList<Object> combinedParts = new ArrayList<Object>();
         for (int i = 0; i < numParts; i++){

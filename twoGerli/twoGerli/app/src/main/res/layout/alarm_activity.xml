@@ -1,53 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/activity_horizontal_margin"
-    android:weightSum="1">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/activity_horizontal_margin"
-    android:weightSum="1">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".AlarmActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_dark"
+        android:minHeight="9dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-    <TextView
-        android:id="@+id/text_view"
-        android:layout_width="311dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="ALARM"
-        android:textSize="28sp"
-        android:layout_weight="0.89" />
+        app:titleTextColor="@android:color/white" />
 
     <Button
-        android:id="@+id/button"
+        android:text="新增鬧鐘"
+        android:background="@android:color/holo_blue_dark"
+        android:textSize="25sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="+"
-        android:textSize="32sp"
-        android:layout_width="40dp"
-       />
+        android:id="@+id/button2"
+        android:onClick="Button_Click" />
 
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:longClickable="true" >
+    </ListView>
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/no_alarms" />
 
 </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="100dp">
-
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:longClickable="true" >
-        </ListView>
-
-    </LinearLayout>
-
-</RelativeLayout>
