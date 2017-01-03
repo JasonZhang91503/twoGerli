@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d("1","15145");
+
         if(!ScheduleIntentService.isServiceRunning(this,"ScheduleIntentService")){
             ScheduleIntentService.startActionNotify(this);
         }
