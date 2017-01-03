@@ -96,9 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         ScheduleDatabase scheduleDatabase = new ScheduleDatabase(this);
-        scheduleDatabase.insertSchedule(CalendarManager.getTime(2016,12,30,5,7,20),"YEAH");
-        scheduleDatabase.insertSchedule(CalendarManager.getTime(2016,12,30,5,7,25),"YEAH");
-        scheduleDatabase.insertSchedule(CalendarManager.getTime(2016,12,30,5,7,28),"YEAH");
+        scheduleDatabase.insertSchedule(CalendarManager.getTime(2017,1,3,5,7,20),"YEAH");
+        scheduleDatabase.insertSchedule(CalendarManager.getTime(2017,1,3,5,7,25),"YEAH");
+        scheduleDatabase.insertSchedule(CalendarManager.getTime(2017,1,6,5,7,28),"YEAH");
 
 
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));

@@ -79,11 +79,11 @@ public class ScheduleIntentService extends IntentService {
         if(notifiTime == null){
             notifiTime = new int[6];
             notifiTime[0] = 1970;
-            notifiTime[0] = 1;
-            notifiTime[0] = 1;
-            notifiTime[0] = 0;
-            notifiTime[0] = 0;
-            notifiTime[0] = 0;
+            notifiTime[1] = 1;
+            notifiTime[2] = 1;
+            notifiTime[3] = 0;
+            notifiTime[4] = 0;
+            notifiTime[5] = 0;
         }
         Calendar calendar = Calendar.getInstance();
         calendar.set(notifiTime[0],notifiTime[1]-1
@@ -98,6 +98,16 @@ public class ScheduleIntentService extends IntentService {
         while (true){
             if(ScheduleDatabase.getModify()){   //若改過就重新問提醒時間
                 notifiTime = scheduleDatabase.getLatestRecordTime();  //會把modify變false
+
+                if(notifiTime == null){
+                    notifiTime = new int[6];
+                    notifiTime[0] = 1970;
+                    notifiTime[1] = 1;
+                    notifiTime[2] = 1;
+                    notifiTime[3] = 0;
+                    notifiTime[4] = 0;
+                    notifiTime[5] = 0;
+                }
 
                 Log.d("ScheduleService","Database is modified, notification time is = "
                         + notifiTime[0] + "-" + notifiTime[1] + "-" +notifiTime[2] + " " +
@@ -128,11 +138,11 @@ public class ScheduleIntentService extends IntentService {
                 if(notifiTime == null){
                     notifiTime = new int[6];
                     notifiTime[0] = 1970;
-                    notifiTime[0] = 1;
-                    notifiTime[0] = 1;
-                    notifiTime[0] = 0;
-                    notifiTime[0] = 0;
-                    notifiTime[0] = 0;
+                    notifiTime[1] = 1;
+                    notifiTime[2] = 1;
+                    notifiTime[3] = 0;
+                    notifiTime[4] = 0;
+                    notifiTime[5] = 0;
                 }
 
                 Log.d("ScheduleService","Database is modified, notification time is = "
