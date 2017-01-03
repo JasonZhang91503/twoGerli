@@ -1,24 +1,21 @@
 <resources>
-    <string name="app_name">NavigationDrawer and ViewPager</string>
+    <string name="app_name">Alarm Clock</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+
     <!-- Application -->
     <color name="holo_blue_light">#ff33b5e5</color>
-
     <!-- Math Alarm Activity -->
-    <!--<string name="app_name">Alarm Clock</string>-->
-    <!--<string name="title_activity_set_alarms">Set Alarm</string>
+
+    <string name="title_activity_set_alarms">Set Alarm</string>
     <string name="no_alarms">No alarms have been set</string>
 
     <string name="button_new">New</string>
--->
+    -->
     <!-- Menu -->
     <string name="menu_item_new">New</string>
     <string name="menu_item_save">Save</string>
     <string name="menu_item_delete">Cancel</string>
-    <string name="menu_item_rate">Rate on Google Play</string>
-    <string name="menu_item_website">Website</string>
-    <string name="menu_item_report">Report a Bug</string>
 
     <!-- Alert -->
     <string name="_0">0</string>
@@ -41,5 +38,4 @@
     <string name="button_delete">Delete</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-
 </resources>

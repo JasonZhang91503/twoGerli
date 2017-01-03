@@ -10,15 +10,11 @@
         android:icon="@mipmap/lists"
         android:title="Agenda" />
 
-    <item
-        android:id="@+id/fr3"
-        android:icon="@mipmap/clock"
-        android:title="Alarm Clock" />
 
     <item
         android:id="@+id/set"
-        android:icon="@mipmap/settings"
-        android:title="Settings" />
+        android:icon="@mipmap/clock"
+        android:title="AlarmClock" />
 
     <item
         android:id="@+id/close"

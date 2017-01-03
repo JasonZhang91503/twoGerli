@@ -3,12 +3,6 @@ package info.devexchanges.navvp.preferences;
 /**
  * Created by user13 on 2016/12/16.
  */
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import info.devexchanges.navvp.Alarm;
-import info.devexchanges.navvp.preferences.AlarmPreference.Type;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -21,6 +15,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import info.devexchanges.navvp.Alarm;
+import info.devexchanges.navvp.preferences.AlarmPreference.Type;
 
 public class AlarmPreferenceListAdapter extends BaseAdapter implements Serializable {//序列化
 
@@ -152,10 +153,9 @@ public class AlarmPreferenceListAdapter extends BaseAdapter implements Serializa
     public void setMathAlarm(Alarm alarm) {
         this.alarm = alarm;
         preferences.clear();
-        preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_ACTIVE,"Active", null, null, alarm.getAlarmActive(),Type.BOOLEAN));
-        preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_NAME, "Label",alarm.getAlarmName(), null, alarm.getAlarmName(), Type.STRING));
+        preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_ACTIVE,"Active", null, null, alarm.getAlarmActive(), Type.BOOLEAN));
         preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_TIME, "Set time",alarm.getAlarmTimeString(), null, alarm.getAlarmTime(), Type.TIME));
-        preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_REPEAT, "Repeat",alarm.getRepeatDaysString(), repeatDays, alarm.getDays(),Type.MULTIPLE_LIST));
+        preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_REPEAT, "Repeat",alarm.getRepeatDaysString(), repeatDays, alarm.getDays(), Type.MULTIPLE_LIST));
 		/*preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_DIFFICULTY,"Difficulty", alarm.getDifficulty().toString(), alarmDifficulties, alarm.getDifficulty(), Type.LIST));*/
 
         Uri alarmToneUri = Uri.parse(alarm.getAlarmTonePath());

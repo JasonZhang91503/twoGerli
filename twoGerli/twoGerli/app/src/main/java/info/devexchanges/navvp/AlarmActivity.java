@@ -84,6 +84,7 @@ public class AlarmActivity extends BaseActivity {
                 Intent intent = new Intent(AlarmActivity.this, AlarmPreferencesActivity.class);
                 intent.putExtra("alarm", alarm);
                 startActivity(intent);
+                Toast.makeText(AlarmActivity.this, alarm.getTimeUntilNextAlarmMessage(), Toast.LENGTH_LONG).show();
             }
 
         });
@@ -93,7 +94,7 @@ public class AlarmActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         boolean result = super.onCreateOptionsMenu(menu);
         menu.findItem(R.id.menu_item_save).setVisible(false);
-        menu.findItem(R.id.menu_item_delete).setVisible(false);
+
         return result;
     }
 
