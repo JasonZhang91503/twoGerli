@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.marcohc.robotocalendar.RobotoCalendarView;
 import com.mobileclass.handsomeboy.myapplication.ScheduleDatabase;
 import com.mobileclass.handsomeboy.myapplication.SchedulePackage;
+import com.mobileclass.handsomeboy.myapplication.Table;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +30,7 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
     private RobotoCalendarView.RobotoCalendarListener robotoCalendarListener;
     Button Input;
     ScheduleDatabase scheduleDatabase;
+    int[] id;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -102,7 +104,7 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
         {
             return;
         }
-        int[] id = schedulePackage.idArr;
+        id = schedulePackage.idArr;
         ArrayList<String> time = schedulePackage.timeArr;
         ArrayList<String> name = schedulePackage.nameArr;
 
@@ -111,12 +113,15 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
         if(schedulePackage != null){
             // 清單陣列
             for(int i=0;i<id.length;i++){
-                adapter.add(name.get(i)+"  "+time.get(i));
+
+                char[] s =time.get(i).toCharArray();
+
+                adapter.add(i+1+". "+name.get(i)+"   "+s[11]+s[12]+s[13]+s[14]+s[15]);
             }
         }
 
 //        String s = time.get(0);
-//        s.toCharArray();
+//        s.toCharArray(); s[0]+s[1]+s[2]+s[3]+s[4]+s[5]+s[6]+s[7]+s[8]+s[9]+s[10]+
 
         listView.setAdapter(adapter);
         //longclick
@@ -127,7 +132,7 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
                                             long arg3) {
                 // TODO Auto-generated method stub
                 ListView listView = (ListView) arg0;// ID arg3  文字 arg2
-
+                scheduleDatabase.delete(Table.SCHEDULE,id[arg2]);
 //                manager.delete(Table.MONTH_PLAN,id[arg2]);
                 list_update();
                 /*
