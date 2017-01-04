@@ -76,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
-
-        Calendar calendar = Calendar.getInstance();
     }
 
     @Override
