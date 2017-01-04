@@ -26,6 +26,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //開啟排程的service  不要刪掉哈哈
+        if(!ScheduleIntentService.isServiceRunning(this,"ScheduleIntentService")){
+            ScheduleIntentService.startActionNotify(this);
+        }
+
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawerLayout);

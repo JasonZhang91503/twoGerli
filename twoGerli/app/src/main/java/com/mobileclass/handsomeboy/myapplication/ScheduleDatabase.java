@@ -38,9 +38,9 @@ public class ScheduleDatabase {
 
     //region Notification
 
-    public int[] getLatestRecordTime(){
+    public NotifyPackage getLatestRecordTime(){
         String currentTime = CalendarManager.getTime();
-        Cursor cursor = db.rawQuery("SELECT Time FROM " + SQLiteDB.scheduleTable +
+        Cursor cursor = db.rawQuery("SELECT Time,Name FROM " + SQLiteDB.scheduleTable +
                 " WHERE "+millisecondFilter+">'" + currentTime + "'" +
                 " ORDER BY Time ASC" +
                 " LIMIT " + 1 ,null);
@@ -51,10 +51,11 @@ public class ScheduleDatabase {
             if(getModify()){
                 setModify(false);
             }
-            return CalendarManager.parseTime(timeStr);
+            return new NotifyPackage(CalendarManager.parseTime(timeStr),cursor.getString(1));
         }
-
-
+        if(getModify()){
+            setModify(false);
+        }
         return null;
     }
 
@@ -365,7 +366,7 @@ public class ScheduleDatabase {
         String sqlTime = "'" + time + "'";
         return db.rawQuery("SELECT _id,Time,Name FROM " + SQLiteDB.scheduleTable +
                 " WHERE "+filter+"=" + sqlTime +
-                " ORDER BY Time DESC",null);
+                " ORDER BY Time ASC",null);
     }
 
     Cursor getCursor_Schedule(String filter,String start, String end){
@@ -373,7 +374,7 @@ public class ScheduleDatabase {
         String sqlEnd = "'" + end + "'";
         return db.rawQuery("SELECT _id,Time,Name FROM " + SQLiteDB.scheduleTable +
                 " WHERE "+filter+">="+sqlStart + " AND " +filter+"<="+sqlEnd +
-                " ORDER BY Time DESC",null);
+                " ORDER BY Time ASC",null);
     }
 
     //endregion

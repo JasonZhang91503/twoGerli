@@ -65,7 +65,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".MPinputActivity"></activity>
+        <activity android:name=".MPinputActivity" />
+
+        <service
+            android:name=".ScheduleIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

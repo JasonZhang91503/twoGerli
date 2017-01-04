@@ -10,6 +10,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.mobileclass.handsomeboy.myapplication.CalendarManager;
+import com.mobileclass.handsomeboy.myapplication.NotifyPackage;
 import com.mobileclass.handsomeboy.myapplication.ScheduleDatabase;
 import com.mobileclass.handsomeboy.myapplication.SchedulePackage;
 
@@ -72,9 +73,54 @@ public class ScheduleIntentService extends IntentService {
      */
     private void handleActionNotification() {
         ScheduleDatabase scheduleDatabase = new ScheduleDatabase(this);
+        Calendar calendar = Calendar.getInstance();
         boolean isNotify = false;
-        int[] notifiTime = scheduleDatabase.getLatestRecordTime();
+        String notifyInfo;
 
+        //初次啟動需要檢查提醒時間
+        notifyInfo = checkTime(scheduleDatabase,calendar);
+
+        //重複偵測提醒時間是否改變
+        while (true){
+            if(ScheduleDatabase.getModify()){   //若改過，重新設定提醒時間
+                notifyInfo = checkTime(scheduleDatabase,calendar);
+            }
+
+            Timestamp notifyTimestamp = new Timestamp(calendar.getTimeInMillis());  //提醒時間
+
+            //比較現在系統時間與提醒的時間是否一樣，並且尚未進行此次提醒
+            if(CalendarManager.getTime().equals(notifyTimestamp.toString()) && !isNotify){
+                Log.d("ScheduleService","Notification time~~~");
+
+                String notiTime = calendar.get(Calendar.YEAR) + "-" +
+                        (calendar.get(Calendar.MONTH) + 1) + "-" +calendar.get(Calendar.DAY_OF_MONTH) + " " +
+                        calendar.get(Calendar.HOUR_OF_DAY) + ":"+ calendar.get(Calendar.MINUTE) + ":" +
+                        calendar.get(Calendar.SECOND);
+                int notifyID = 1; // 通知的識別號碼
+
+                NotificationManager notificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); // 取得系統的通知服務
+                Notification notification = new Notification.Builder(getApplicationContext())
+                        .setContentTitle(notifyInfo).setContentText(notiTime).setSmallIcon(R.drawable.glyphicons_049_star).getNotification(); // 建立通知
+                notificationManager.notify(notifyID, notification); // 發送通知
+
+                //再次確認提醒時間
+                notifyInfo = checkTime(scheduleDatabase,calendar);
+
+                isNotify = true;
+            } else if(CalendarManager.getTime().equals(notifyTimestamp.toString())){
+                //是提醒時間，但是此次已經通知過了
+            }
+            else{   //時間超過後要設isNotify為false
+                isNotify = false;
+            }
+
+        }
+    }
+
+    String checkTime(ScheduleDatabase database,Calendar calendar){
+        NotifyPackage notifyPackage = database.getLatestRecordTime();
+        int[] notifiTime = notifyPackage.idArr;
 
         if(notifiTime == null){
             notifiTime = new int[6];
@@ -85,7 +131,6 @@ public class ScheduleIntentService extends IntentService {
             notifiTime[4] = 0;
             notifiTime[5] = 0;
         }
-        Calendar calendar = Calendar.getInstance();
         calendar.set(notifiTime[0],notifiTime[1]-1
                 ,notifiTime[2],notifiTime[3],notifiTime[4],notifiTime[5]);
         calendar.set(Calendar.MILLISECOND,0);
@@ -94,74 +139,7 @@ public class ScheduleIntentService extends IntentService {
                 + notifiTime[0] + "-" + notifiTime[1] + "-" +notifiTime[2] + " " +
                 notifiTime[3] + ":"+ notifiTime[4] + ":" + notifiTime[5]);
 
-        //重複詢問是否改過值
-        while (true){
-            if(ScheduleDatabase.getModify()){   //若改過就重新問提醒時間
-                notifiTime = scheduleDatabase.getLatestRecordTime();  //會把modify變false
-
-                if(notifiTime == null){
-                    notifiTime = new int[6];
-                    notifiTime[0] = 1970;
-                    notifiTime[1] = 1;
-                    notifiTime[2] = 1;
-                    notifiTime[3] = 0;
-                    notifiTime[4] = 0;
-                    notifiTime[5] = 0;
-                }
-
-                Log.d("ScheduleService","Database is modified, notification time is = "
-                        + notifiTime[0] + "-" + notifiTime[1] + "-" +notifiTime[2] + " " +
-                        notifiTime[3] + ":"+ notifiTime[4] + ":" + notifiTime[5]);
-                calendar.set(notifiTime[0],notifiTime[1]-1
-                        ,notifiTime[2],notifiTime[3],notifiTime[4],notifiTime[5]);
-                calendar.set(Calendar.MILLISECOND,0);
-
-            }
-            else{   //時間沒改動過
-
-            }
-            Timestamp t = new Timestamp(calendar.getTimeInMillis());
-            //Log.d("Timestamp",t.toString());
-
-            if(CalendarManager.getTime().equals(t.toString()) && !isNotify){
-                Log.d("ScheduleService","Notification time~~~");
-                final int notifyID = 1; // 通知的識別號碼
-                final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); // 取得系統的通知服務
-                final Notification notification = new Notification.Builder(getApplicationContext())
-                        .setContentTitle("內容標題").setContentText(notifiTime[0] + "-" + notifiTime[1] + "-" +notifiTime[2] + " " +
-                                notifiTime[3] + ":"+ notifiTime[4] + ":" + notifiTime[5]).setSmallIcon(R.drawable.glyphicons_049_star).getNotification(); // 建立通知
-                notificationManager.notify(notifyID, notification); // 發送通知
-
-
-                notifiTime = scheduleDatabase.getLatestRecordTime();  //會把modify變false
-
-                if(notifiTime == null){
-                    notifiTime = new int[6];
-                    notifiTime[0] = 1970;
-                    notifiTime[1] = 1;
-                    notifiTime[2] = 1;
-                    notifiTime[3] = 0;
-                    notifiTime[4] = 0;
-                    notifiTime[5] = 0;
-                }
-
-                Log.d("ScheduleService","Database is modified, notification time is = "
-                        + notifiTime[0] + "-" + notifiTime[1] + "-" +notifiTime[2] + " " +
-                        notifiTime[3] + ":"+ notifiTime[4] + ":" + notifiTime[5]);
-                calendar.set(notifiTime[0],notifiTime[1]-1
-                        ,notifiTime[2],notifiTime[3],notifiTime[4],notifiTime[5]);
-                calendar.set(Calendar.MILLISECOND,0);
-                isNotify = true;
-            } else if(CalendarManager.getTime().equals(t.toString())){
-                //時間剛好且通知過
-            }
-            else{
-                isNotify = false;
-            }
-
-        }
-
-
+        return notifyPackage.notifyInfo;
     }
 
     public static boolean isServiceRunning(Context context, String serviceClassName){
