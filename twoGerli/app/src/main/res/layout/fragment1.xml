@@ -4,11 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin">
+
+
     <com.marcohc.robotocalendar.RobotoCalendarView
         android:id="@+id/robotoCalendarPicker"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="270dp">
+        android:layout_height="300dp">
 
     </com.marcohc.robotocalendar.RobotoCalendarView>
 
