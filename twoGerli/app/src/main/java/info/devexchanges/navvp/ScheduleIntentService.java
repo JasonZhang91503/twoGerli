@@ -120,9 +120,9 @@ public class ScheduleIntentService extends IntentService {
 
     String checkTime(ScheduleDatabase database,Calendar calendar){
         NotifyPackage notifyPackage = database.getLatestRecordTime();
-        int[] notifiTime = notifyPackage.idArr;
+        int[] notifiTime;
 
-        if(notifiTime == null){
+        if(notifyPackage == null){
             notifiTime = new int[6];
             notifiTime[0] = 1970;
             notifiTime[1] = 1;
@@ -130,6 +130,9 @@ public class ScheduleIntentService extends IntentService {
             notifiTime[3] = 0;
             notifiTime[4] = 0;
             notifiTime[5] = 0;
+        }
+        else{
+            notifiTime = notifyPackage.idArr;
         }
         calendar.set(notifiTime[0],notifiTime[1]-1
                 ,notifiTime[2],notifiTime[3],notifiTime[4],notifiTime[5]);
@@ -139,6 +142,9 @@ public class ScheduleIntentService extends IntentService {
                 + notifiTime[0] + "-" + notifiTime[1] + "-" +notifiTime[2] + " " +
                 notifiTime[3] + ":"+ notifiTime[4] + ":" + notifiTime[5]);
 
+        if(notifyPackage == null){
+            return null;
+        }
         return notifyPackage.notifyInfo;
     }
 
