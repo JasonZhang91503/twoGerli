@@ -13,7 +13,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.marcohc.robotocalendar.RobotoCalendarView;
+import com.mobileclass.handsomeboy.myapplication.ScheduleDatabase;
+import com.mobileclass.handsomeboy.myapplication.SchedulePackage;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCalendarListener{
@@ -25,8 +28,7 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
     private View myView;
     private RobotoCalendarView.RobotoCalendarListener robotoCalendarListener;
     Button Input;
-    int[] id;
-    String[] description;
+    ScheduleDatabase scheduleDatabase;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -92,19 +94,27 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
         //listview
         listView = (ListView) myView.findViewById(R.id.listView1);
         // 資料庫取得
-
+        scheduleDatabase=new ScheduleDatabase(getActivity());
+        SchedulePackage schedulePackage = scheduleDatabase.getScheduleByDay(year,month,date);
+        if(schedulePackage==null)
+        {
+            return;
+        }
+        int[] id = schedulePackage.idArr;
+        ArrayList<String> time = schedulePackage.timeArr;
+        ArrayList<String> name = schedulePackage.nameArr;
 
         adapter = new ArrayAdapter(getContext(),
                 android.R.layout.simple_list_item_1);
-//        if(planPackage != null){
-//            id=planPackage.id;
-//            description = planPackage.description;
-//            // 清單陣列
-//
-//            for(int i=0;i<description.length;i++){
-//                adapter.add(description[i]+id[i]);
-//            }
-//        }
+        if(schedulePackage != null){
+            // 清單陣列
+            for(int i=0;i<id.length;i++){
+                adapter.add(name.get(i)+"  "+time.get(i));
+            }
+        }
+
+//        String s = time.get(0);
+//        s.toCharArray();
 
         listView.setAdapter(adapter);
         //longclick
@@ -133,7 +143,18 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
     @Override
     public void onResume() {
         super.onResume();
-        list_update();
+
+        Calendar calendar = Calendar.getInstance();
+
+        if(year == 0){
+            onDayClick(calendar);
+        }else{
+            calendar.set(Calendar.YEAR,year);
+            calendar.set(Calendar.MONTH,month - 1);
+            calendar.set(Calendar.DAY_OF_MONTH,date);
+            onDayClick(calendar);
+        }
+
     }
 
     @Override
