@@ -107,6 +107,7 @@ public class ScheduleDatabase {
             idArr[i] = id;
             timeArray.add(time);
             nameArray.add(name);
+            cursor.moveToNext();
         }
 
         return new SchedulePackage(idArr,timeArray,nameArray);

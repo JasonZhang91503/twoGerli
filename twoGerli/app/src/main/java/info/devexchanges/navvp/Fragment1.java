@@ -45,6 +45,8 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
         robotoCalendarView.showDateTitle(true);
 
         robotoCalendarView.updateView();
+
+        scheduleDatabase=new ScheduleDatabase(getActivity());
      return  myView;
     }
 
@@ -94,7 +96,7 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
         //listview
         listView = (ListView) myView.findViewById(R.id.listView1);
         // 資料庫取得
-        scheduleDatabase=new ScheduleDatabase(getActivity());
+
         SchedulePackage schedulePackage = scheduleDatabase.getScheduleByDay(year,month,date);
         if(schedulePackage==null)
         {

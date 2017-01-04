@@ -34,54 +34,54 @@ public class CalendarManager {
 
     public static String getYear(){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
-        return yearDateFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return yearDateFormat.format(calendar.getTimeInMillis());
     }
 
     public static String getYear(Calendar calendar){
-        return yearDateFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return yearDateFormat.format(calendar.getTimeInMillis());
     }
 
     public static String getYear(int year){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
         calendar.set(year,0,1);
-        return yearDateFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return yearDateFormat.format(calendar.getTimeInMillis());
     }
 
     public static String getMonth(){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
-        return monthDateFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return monthDateFormat.format(calendar.getTimeInMillis());
     }
 
     public static String getMonth(Calendar calendar){
-        return monthDateFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return monthDateFormat.format(calendar.getTimeInMillis());
     }
 
     public static String getMonth(int year,int month){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
         calendar.set(year,month - 1,1);
-        return monthDateFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return monthDateFormat.format(calendar.getTimeInMillis());
     }
 
     public static String getDay(){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
-        return dayDateFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return dayDateFormat.format(calendar.getTimeInMillis());
     }
 
     public static String getDay(Calendar calendar){
-        return dayDateFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return dayDateFormat.format(calendar.getTimeInMillis());
     }
 
     public static String getDay(int year,int month,int day){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
         calendar.set(year,month-1,day);
-        return dayDateFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return dayDateFormat.format(calendar.getTimeInMillis());
     }
 
     public static String getClock(int hour,int minute){
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
         calendar.set(Calendar.HOUR_OF_DAY,hour);
         calendar.set(Calendar.MINUTE,minute);
-        return clockFormat.format(calendar.getTimeInMillis() + rawOffSet);
+        return clockFormat.format(calendar.getTimeInMillis());
     }
 
     public static int[] getClock(String time){
