@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="600dp">
+
+
+
+
+            <com.marcohc.robotocalendar.RobotoCalendarView
+                android:id="@+id/robotoCalendarPicker"
+                android:layout_width="match_parent"
+                android:layout_height="340dp">
+
+            </com.marcohc.robotocalendar.RobotoCalendarView>
+
+
+
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="match_parent"
+            android:cacheColorHint="#00000000"
+
+            android:textColor="#F1BD9D"
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="34dp">
+        </ListView>
+
+        <Button
+            android:text="ADD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/robotoCalendarPicker"
+            android:layout_alignParentRight="true"
+            android:id="@+id/add"
+            android:onClick="buttom_Click2"
+            android:textColor="#353E70"
+            android:layout_weight="1"
+           />
+
+    </RelativeLayout>
+
+
+
+
+</ScrollView>
