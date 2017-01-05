@@ -126,9 +126,6 @@ public class AlarmPreferenceListAdapter extends BaseAdapter implements Serializa
                 case ALARM_ACTIVE:
                     alarm.setAlarmActive((Boolean) preference.getValue());
                     break;
-                case ALARM_NAME:
-                    alarm.setAlarmName((String) preference.getValue());
-                    break;
                 case ALARM_TIME:
                     alarm.setAlarmTime((String) preference.getValue());
                     break;
@@ -156,7 +153,7 @@ public class AlarmPreferenceListAdapter extends BaseAdapter implements Serializa
         preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_ACTIVE,"Active", null, null, alarm.getAlarmActive(), Type.BOOLEAN));
         preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_TIME, "Set time",alarm.getAlarmTimeString(), null, alarm.getAlarmTime(), Type.TIME));
         preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_REPEAT, "Repeat",alarm.getRepeatDaysString(), repeatDays, alarm.getDays(), Type.MULTIPLE_LIST));
-		/*preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_DIFFICULTY,"Difficulty", alarm.getDifficulty().toString(), alarmDifficulties, alarm.getDifficulty(), Type.LIST));*/
+		preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_DIFFICULTY,"Difficulty", alarm.getDifficulty().toString(), alarmDifficulties, alarm.getDifficulty(), Type.LIST));
 
         Uri alarmToneUri = Uri.parse(alarm.getAlarmTonePath());
         Ringtone alarmTone = RingtoneManager.getRingtone(getContext(), alarmToneUri);

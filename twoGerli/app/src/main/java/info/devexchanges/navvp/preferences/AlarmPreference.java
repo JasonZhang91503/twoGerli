@@ -7,7 +7,6 @@ package info.devexchanges.navvp.preferences;
 public class AlarmPreference {
 
     public enum Key{
-        ALARM_NAME,
         ALARM_ACTIVE,
         ALARM_TIME,
         ALARM_REPEAT,

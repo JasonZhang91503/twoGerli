@@ -93,34 +93,7 @@ public class AlarmPreferencesActivity extends BaseActivity {
                         }
                         alarmPreference.setValue(checked);
                         break;
-                    case STRING:
-
-                        alert = new AlertDialog.Builder(AlarmPreferencesActivity.this);
-
-                        alert.setTitle(alarmPreference.getTitle());
-                        /* alert.setMessage(message);*/
-
-                        // Set an EditText view to get user input
-                        final EditText input = new EditText(AlarmPreferencesActivity.this);
-
-                        input.setText(alarmPreference.getValue().toString());
-
-                        alert.setView(input);
-                        alert.setPositiveButton("Ok", new OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-
-                                alarmPreference.setValue(input.getText().toString());
-
-                                if (alarmPreference.getKey() == Key.ALARM_NAME) {
-                                    alarm.setAlarmName(alarmPreference.getValue().toString());
-                                }
-
-                                alarmPreferenceListAdapter.setMathAlarm(getMathAlarm());
-                                alarmPreferenceListAdapter.notifyDataSetChanged();
-                            }
-                        });
-                        alert.show();
-                        break;
+                    
                     case LIST:
                         alert = new AlertDialog.Builder(AlarmPreferencesActivity.this);
 
