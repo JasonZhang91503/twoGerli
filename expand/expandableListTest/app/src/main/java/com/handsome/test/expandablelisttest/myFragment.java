@@ -36,8 +36,6 @@ public class myFragment extends Fragment implements AbsListView.OnScrollListener
     private final LinearLayout.LayoutParams mTipContentLayoutParams = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT);
-
-    private int count=40;
     Calendar c=Calendar.getInstance();
 
     public myFragment() {
@@ -117,10 +115,10 @@ public class myFragment extends Fragment implements AbsListView.OnScrollListener
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if(mLastItem==count
+        if(mLastItem==mExpandAdapter.count
                 && scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE)
         {
-            if(count<=mCount)
+            if(mExpandAdapter.count<=mCount)
             {
                 mHandler.postDelayed(new Runnable() {
                     @Override
