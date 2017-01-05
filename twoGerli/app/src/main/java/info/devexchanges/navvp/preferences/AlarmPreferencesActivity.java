@@ -3,6 +3,7 @@ package info.devexchanges.navvp.preferences;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import info.devexchanges.navvp.Alarm;
@@ -41,10 +44,12 @@ public class AlarmPreferencesActivity extends BaseActivity {
 
     private ListAdapter listAdapter;
     private ListView listView;
+    //private myListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_preferences);
+
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -327,5 +332,12 @@ public class AlarmPreferencesActivity extends BaseActivity {
     @Override
     public void onClick(View view) {
         // super.onClick(v);
+    }
+
+    public class myListView extends ListView implements Serializable{
+
+        public myListView(Context context) {
+            super(context);
+        }
     }
 }
