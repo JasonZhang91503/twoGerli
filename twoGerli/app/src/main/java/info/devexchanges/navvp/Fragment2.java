@@ -193,5 +193,57 @@ public class Fragment2 extends Fragment implements AbsListView.OnScrollListener{
         return 0;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        int Month;
+        int Day;
+        int Year;
+        List<String> itemList=new ArrayList<String>();
+        List<Integer> year=new ArrayList<Integer>();
+        List<Integer> month=new ArrayList<Integer>();
+        List<Integer> day=new ArrayList<Integer>();
+        Month=c.get(Calendar.MONTH)+1;
+        Day=c.get(Calendar.DAY_OF_MONTH);
+        Year=c.get(Calendar.YEAR);
+        for (int i=0;i<mCount;i++)
+        {
+            if(Day>monthcheck(Month))//換下個月
+            {
+                Day=0;
+                if(Month==12)
+                    Month=1;
+                else
+                    Month++;
+            }
+            else
+            {
+                if(Day==1)
+                    if(Month==1){
+                        ++Year;
+                        itemList.add(Year+"/"+Month+"/"+Day);
+                        year.add(Year);
+                        month.add(Month);
+                        day.add(Day);
+                    }
+                    else
+                    {
+                        itemList.add(Year+"/"+Month+"/"+Day);
+                        year.add(Year);
+                        month.add(Month);
+                        day.add(Day);
+                    }
 
+                else{
+                    itemList.add(Month+"/"+Day);
+                    year.add(Year);
+                    month.add(Month);
+                    day.add(Day);
+                }
+            }
+            Day++;
+        }
+        mExpandAdapter=new ExpandableLayoutAdapter(getActivity(),itemList,year,month,day);
+        lsv_main.setAdapter(mExpandAdapter);
+    }
 }
