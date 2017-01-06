@@ -71,7 +71,7 @@ public class Fragment1 extends Fragment  implements RobotoCalendarView.RobotoCal
         year=daySelectedCalendar.get(Calendar.YEAR);
         month=daySelectedCalendar.get(Calendar.MONTH)+1;//月處理的方式
         date=daySelectedCalendar.get(Calendar.DAY_OF_MONTH);
-        robotoCalendarView.markCircleImage1(daySelectedCalendar);//產生點點的函式
+        //robotoCalendarView.markCircleImage1(daySelectedCalendar);//產生點點的函式
 
         list_update();
 

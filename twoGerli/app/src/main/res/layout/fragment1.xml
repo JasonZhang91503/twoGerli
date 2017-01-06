@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:padding="@dimen/activity_horizontal_margin"
+    android:background="#EBECF6">
 	
 	<com.marcohc.robotocalendar.RobotoCalendarView
         android:id="@+id/robotoCalendarPicker"
@@ -26,17 +27,17 @@
         android:onClick="buttom_Click2"
         android:textColor="#353E70"
         android:layout_weight="1"
-        />
+        android:background="@drawable/circle" />
 
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:cacheColorHint="#00000000"
-
-        android:textColor="#F1BD9D"
+        android:background="#EBECF6"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_weight="1"
+        android:textColor="#353E70"
         android:layout_height="160dp">
     </ListView>
 
