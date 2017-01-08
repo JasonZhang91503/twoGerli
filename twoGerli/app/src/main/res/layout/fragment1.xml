@@ -18,16 +18,15 @@
     </com.marcohc.robotocalendar.RobotoCalendarView>
 
     <Button
-        android:text="ADD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/robotoCalendarPicker"
         android:layout_alignParentRight="true"
         android:id="@+id/add"
         android:onClick="buttom_Click2"
         android:textColor="#353E70"
         android:layout_weight="1"
-        android:background="@drawable/circle" />
+        android:background="@drawable/create_new" />
 
     <ListView
         android:id="@+id/listView1"
@@ -40,8 +39,6 @@
         android:textColor="#353E70"
         android:layout_height="160dp">
     </ListView>
-
-    
 
 
 </RelativeLayout>
